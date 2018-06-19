@@ -21,25 +21,42 @@ typedef struct player{
     float Slugging_Percentage;
 } Player;
 
-int main(int argc, const char * argv[])
+
+void readFromFile(char* filename, Player* players, int i, int size);
+void write_to_file(char* filename, Player* players, int size);
+void calculate_slugging(Player* players, int size);
+int main(int argc, char * argv[])
+
+
 {
-    
     int numOfPlayers = atoi(argv[1]);
     
+    Player* ptrarray = malloc(sizeof(Player) * numOfPlayers);
+    
+    int size = numOfPlayers / 3;
+    
+    int index = 0;
+    
+    readFromFile("/Users/krekeler/Desktop/input1-1.txt", ptrarray , index , size);
+    //calculate_slugging(ptrarray, numOfPlayers);
+    
+    index += 10;
+    
+    readFromFile("/Users/krekeler/Desktop/input2-1.txt", ptrarray, index, size);
+    
+    index = 20;
+    
+    readFromFile("/Users/krekeler/Desktop/input3.txt", ptrarray, index, size);
     
     
+    write_to_file("/Users/krekeler/Desktop/output.txt", ptrarray, numOfPlayers);
     
     
-    //malloc(sizeof(Player) * numOfPlayers);
-    
-//    printf("%s", readFromFile(argv[2], struct Player, 1, numOfPlayers));
-    
-    
-    
+    free(ptrarray);
     
 }
 
-void readFromFile(char* filename, Player* players, int i, int size)
+void readFromFile(char* filename, Player* players, int index, int size)
 {
     
     FILE *file = fopen(filename, "r");
@@ -48,13 +65,19 @@ void readFromFile(char* filename, Player* players, int i, int size)
     {
         printf("Could not read file");
     }
-
-    for (i = 0; i < size; i++) {
+    
+    int i;
+    for (i = index ; i < index + size ; i++) {
         
-        fscanf(file, "%s %s %d %d %d %d %d %f", &players[i].Fname[25], &players[i].Lname[25], &players[i].Singles, &players[i].Doubles,  &players[i].Triples, &players[i].Homeruns, &players[i].At_Bats, &players[i].Slugging_Percentage);
+        Player temp;
+        
+        fscanf(file, "%s %s %d %d %d %d %d %f\n", temp.Fname, temp.Lname, &temp.Singles, &temp.Doubles, &temp.Triples, &temp.Homeruns, &temp.At_Bats, &temp.Slugging_Percentage);
+        
+        players[i] = temp;
         
     }
     
+    fclose(file);
     // make sure you look at the array location at each file, becasue you could overwrite sectrions of the array if you are not careful.
     // This function will read in size struct players from filename and add these
     // the players array. The function will use index to know where to start
@@ -77,7 +100,7 @@ void calculate_slugging(Player* players, int size)
     triples = players->Triples * 3;
     homeruns = players->Homeruns * 4;
     
-    players->Slugging_Percentage = singles + doubles + triples + homeruns / players->At_Bats;
+    players->Slugging_Percentage = (singles + doubles + triples + homeruns / players->At_Bats);
     
     
     // This function will take in an array of players and calculate their slugging
@@ -123,6 +146,21 @@ void sort_array(Player* players, int size)
 
 void write_to_file(char* filename, Player* players, int size){
     
+    FILE *file = fopen(filename, "w");
+    
+    if (file == NULL)
+    {
+        printf("Could not read file");
+    }
+    
+    int i;
+    
+    for (i = 0; i < size; i++) {
+    
+        fprintf(file, "%s %s %d %d %d %d %d %f\n", players[i].Fname, players[i].Lname, players[i].Singles, players[i].Doubles,  players[i].Triples, players[i].Homeruns, players[i].At_Bats, players[i].Slugging_Percentage);
+    }
+    
+    fclose(file);
     //write the sorted array DECENDING ORDER
     
 // This function will take in a structure of players and print them into the      // given

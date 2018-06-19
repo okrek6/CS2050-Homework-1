@@ -25,9 +25,10 @@
 /* Begin PBXFileReference section */
 		E27C46E120D39A3700AD1965 /* hmwrk3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hmwrk3; sourceTree = BUILT_PRODUCTS_DIR; };
 		E27C46E420D39A3700AD1965 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		E27C46EC20D5AD6900AD1965 /* input2-1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "input2-1.txt"; path = "../../../../../../../Downloads/input2-1.txt"; sourceTree = "<group>"; };
-		E27C46ED20D5AD6A00AD1965 /* input1-1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "input1-1.txt"; path = "../../../../../../../Downloads/input1-1.txt"; sourceTree = "<group>"; };
-		E27C46EE20D5AD6A00AD1965 /* input3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = input3.txt; path = ../../../../../../../Downloads/input3.txt; sourceTree = "<group>"; };
+		E27C46EC20D5AD6900AD1965 /* input2-1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "input2-1.txt"; path = "../../../../../../input2-1.txt"; sourceTree = "<group>"; };
+		E27C46ED20D5AD6A00AD1965 /* input1-1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "input1-1.txt"; path = "../../../../../../input1-1.txt"; sourceTree = "<group>"; };
+		E27C46EE20D5AD6A00AD1965 /* input3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = input3.txt; path = ../../../../../../input3.txt; sourceTree = "<group>"; };
+		E27C46EF20D9814F00AD1965 /* output.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = output.txt; path = ../../../../../../output.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +65,7 @@
 				E27C46ED20D5AD6A00AD1965 /* input1-1.txt */,
 				E27C46EC20D5AD6900AD1965 /* input2-1.txt */,
 				E27C46EE20D5AD6A00AD1965 /* input3.txt */,
+				E27C46EF20D9814F00AD1965 /* output.txt */,
 			);
 			path = hmwrk3;
 			sourceTree = "<group>";
