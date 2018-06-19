@@ -25,9 +25,8 @@ typedef struct player{
 void readFromFile(char* filename, Player* players, int i, int size);
 void write_to_file(char* filename, Player* players, int size);
 void calculate_slugging(Player* players, int size);
+void sort_array(Player* players, int size);
 int main(int argc, char * argv[])
-
-
 {
     int numOfPlayers = atoi(argv[1]);
     
@@ -47,6 +46,9 @@ int main(int argc, char * argv[])
     index = 20;
     
     readFromFile("/Users/krekeler/Desktop/input3.txt", ptrarray, index, size);
+    
+    calculate_slugging(ptrarray, numOfPlayers);
+    
     
     
     write_to_file("/Users/krekeler/Desktop/output.txt", ptrarray, numOfPlayers);
@@ -71,7 +73,7 @@ void readFromFile(char* filename, Player* players, int index, int size)
         
         Player temp;
         
-        fscanf(file, "%s %s %d %d %d %d %d %f\n", temp.Fname, temp.Lname, &temp.Singles, &temp.Doubles, &temp.Triples, &temp.Homeruns, &temp.At_Bats, &temp.Slugging_Percentage);
+        fscanf(file, "%s %s %d %d %d %d %d\n", temp.Fname, temp.Lname, &temp.Singles, &temp.Doubles, &temp.Triples, &temp.Homeruns, &temp.At_Bats);
         
         players[i] = temp;
         
@@ -94,14 +96,18 @@ void readFromFile(char* filename, Player* players, int index, int size)
 void calculate_slugging(Player* players, int size)
 {
     int singles, doubles, triples, homeruns;
+    int i;
     
-    singles = players->Singles;
-    doubles = players->Doubles * 2;
-    triples = players->Triples * 3;
-    homeruns = players->Homeruns * 4;
+    for (i = 0; i < size; i++) {
+        
+    singles = players[i].Singles;
+    doubles = players[i].Doubles * 2;
+    triples = players[i].Triples * 3;
+    homeruns = players[i].Homeruns * 4;
     
-    players->Slugging_Percentage = (singles + doubles + triples + homeruns / players->At_Bats);
-    
+    players[i].Slugging_Percentage = (float)singles + (float)doubles + (float)triples + (float)homeruns / (float)players[i].At_Bats;
+        
+    }
     
     // This function will take in an array of players and calculate their slugging
     // percentage using the other variables in the structure(Singles, Doubles,
@@ -123,6 +129,7 @@ void sort_array(Player* players, int size)
     for (i = 0; i < size - 1; i++) {
         for (j = 0; j < size - i -1; j++) {
             if( (players+j)->Slugging_Percentage > (players+j)->Slugging_Percentage){
+                
                 Player temp;
                 
                 temp.Slugging_Percentage = players[j].Slugging_Percentage;
@@ -157,7 +164,7 @@ void write_to_file(char* filename, Player* players, int size){
     
     for (i = 0; i < size; i++) {
     
-        fprintf(file, "%s %s %d %d %d %d %d %f\n", players[i].Fname, players[i].Lname, players[i].Singles, players[i].Doubles,  players[i].Triples, players[i].Homeruns, players[i].At_Bats, players[i].Slugging_Percentage);
+        fprintf(file, "%s %s %d %d %d %d %d %.2f\n", players[i].Fname, players[i].Lname, players[i].Singles, players[i].Doubles,  players[i].Triples, players[i].Homeruns, players[i].At_Bats, players[i].Slugging_Percentage);
     }
     
     fclose(file);
