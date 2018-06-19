@@ -49,6 +49,8 @@ int main(int argc, char * argv[])
     
     calculate_slugging(ptrarray, numOfPlayers);
     
+    sort_array(ptrarray, numOfPlayers);
+    
     
     
     write_to_file("/Users/krekeler/Desktop/output.txt", ptrarray, numOfPlayers);
@@ -125,12 +127,14 @@ void sort_array(Player* players, int size)
 {
     int i;
     int j;
-
+    
+    
+    Player temp;
+    
+    
     for (i = 0; i < size - 1; i++) {
         for (j = 0; j < size - i -1; j++) {
-            if( (players+j)->Slugging_Percentage > (players+j)->Slugging_Percentage){
-                
-                Player temp;
+            if (players[j].Slugging_Percentage < players[j+1].Slugging_Percentage){
                 
                 temp.Slugging_Percentage = players[j].Slugging_Percentage;
                 players[j].Slugging_Percentage = players[j+1].Slugging_Percentage;
@@ -173,7 +177,7 @@ void write_to_file(char* filename, Player* players, int size){
 // This function will take in a structure of players and print them into the      // given
 // output file, filename
 // Parameters
-//
+//8
 // filename – the name of the output file
 // players – a pointer to the array of struct players to write to the file
 // size – the size of the players  array
