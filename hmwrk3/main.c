@@ -28,6 +28,13 @@ void calculate_slugging(Player* players, int size);
 void sort_array(Player* players, int size);
 int main(int argc, char * argv[])
 {
+    if (argc != 5)
+    {
+        printf("INCORRECT USE OF PROGRAM\nCorrect usage: ./a.out <Total_Number_Of_Players> <input1> <input2> <input3> <output>\n ...EXITING...\n");
+        
+        return -1;
+    }
+    
     int numOfPlayers = atoi(argv[1]);
     
     Player* ptrarray = malloc(sizeof(Player) * numOfPlayers);
@@ -36,24 +43,22 @@ int main(int argc, char * argv[])
     
     int index = 0;
     
-    readFromFile("/Users/krekeler/Desktop/input1-1.txt", ptrarray , index , size);
+    readFromFile(argv[2], ptrarray , index , size);
     //calculate_slugging(ptrarray, numOfPlayers);
     
     index += 10;
     
-    readFromFile("/Users/krekeler/Desktop/input2-1.txt", ptrarray, index, size);
+    readFromFile(argv[3], ptrarray, index, size);
     
     index = 20;
     
-    readFromFile("/Users/krekeler/Desktop/input3.txt", ptrarray, index, size);
+    readFromFile(argv[4], ptrarray, index, size);
     
     calculate_slugging(ptrarray, numOfPlayers);
     
     sort_array(ptrarray, numOfPlayers);
     
-    
-    
-    write_to_file("/Users/krekeler/Desktop/output.txt", ptrarray, numOfPlayers);
+    write_to_file(argv[5], ptrarray, numOfPlayers);
     
     
     free(ptrarray);
@@ -70,14 +75,14 @@ void readFromFile(char* filename, Player* players, int index, int size)
         printf("Could not read file");
     }
     
-    int i;
-    for (i = index ; i < index + size ; i++) {
+    int counter;
+    for (counter = index ; counter < index + size ; counter++) {
         
         Player temp;
         
         fscanf(file, "%s %s %d %d %d %d %d\n", temp.Fname, temp.Lname, &temp.Singles, &temp.Doubles, &temp.Triples, &temp.Homeruns, &temp.At_Bats);
         
-        players[i] = temp;
+        players[counter] = temp;
         
     }
     
